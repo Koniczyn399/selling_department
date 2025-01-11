@@ -47,7 +47,6 @@ class UserController extends Controller
             'users.form',
             [
                 'user'=> $user,
-                'show'=> false,
             ]
         );
     }
@@ -60,7 +59,6 @@ class UserController extends Controller
             'users.show',
             [
                 'user'=> $user,
-                'show'=> true,
             ]
         );
     }

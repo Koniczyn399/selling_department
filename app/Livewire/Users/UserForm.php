@@ -26,7 +26,7 @@ class UserForm extends Component
     public $street_number = "";
     public $phone_number = "";
     public $description="";
-    public $show=false;
+
 
     public function mount(User $user = null, $show)
     {
@@ -34,7 +34,7 @@ class UserForm extends Component
         //dd($manufacturer);
 
         $this->user = $user;
-        $this->show = $show;
+
 
         if (isset($user->id)) {
             $this->id = $user->id;
@@ -48,10 +48,6 @@ class UserForm extends Component
             $this->phone_number = $user->phone_number;
             $this->description = $user->description;
             $this->email = $user->email;
-
-            if($show){
-                $user = User::findOrFail($user->id);
-            }
         }
     }
 
