@@ -28,7 +28,7 @@ class UserForm extends Component
     public $description="";
 
 
-    public function mount(User $user = null, $show)
+    public function mount(User $user = null)
     {
 
         //dd($manufacturer);

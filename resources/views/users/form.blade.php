@@ -11,7 +11,7 @@
               
                 @if (isset($user->id)) 
                 
-                    <livewire:users.user-form :user="$user"/>
+                    <livewire:users.user-form :user="$user" />
                 @else
                     <livewire:users.user-form />
                 @endif
