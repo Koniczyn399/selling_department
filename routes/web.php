@@ -31,14 +31,11 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::name('users.')->prefix('users')->group(function () {
-        Route::get('', [UserController::class, 'index'])
-            ->name('index');
-    });
-
     Route::resource('users', UserController::class)->only([
+        'index',
         'create',
         'edit',
+        'show',
     ]);
 
     Route::resource('manufacturers', ManufacturerController::class)->only([

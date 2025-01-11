@@ -43,7 +43,7 @@ final class UserTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return User::query()->with('roles');
+        return User::query();
     }
 
     public function relationSearch(): array
@@ -107,56 +107,36 @@ final class UserTable extends PowerGridComponent
         $this->js('alert(' . $rowId . ')');
     }
 
-    #[\Livewire\Attributes\On('assignAdminRoleAction')]
-    public function assignAdminRoleAction($id): void
+
+    
+    #[\Livewire\Attributes\On('remove_user')]
+    public function remove_user($id): void
     {
-        $this->authorize('update', Auth::user());
-        User::findOrFail($id)->assignRole(RoleType::ADMIN->value);
+        $this->authorize('delete', User::findOrFail($id));
+        User::findOrFail($id)->delete();
     }
 
-    #[\Livewire\Attributes\On('removeAdminRoleAction')]
-    public function removeAdminRoleAction($id): void
-    {
-        $this->authorize('update', Auth::user());
-        User::findOrFail($id)->removeRole(RoleType::ADMIN->value);
-    }
-
-    #[\Livewire\Attributes\On('assignWorkerRoleAction')]
-    public function assignWorkerRoleAction($id): void
-    {
-        $this->authorize('update', Auth::user());
-        User::findOrFail($id)->assignRole(RoleType::WORKER->value);
-    }
-
-    #[\Livewire\Attributes\On('removeWorkerRoleAction')]
-    public function removeWorkerRoleAction($id): void
-    {
-        $this->authorize('update', Auth::user());
-        User::findOrFail($id)->removeRole(RoleType::WORKER->value);
-    }
     public function actions(User $user): array
     {
         return [
-            Button::add('assignAdminRoleAction')
-                ->slot(Blade::render('<x-wireui-icon name="shield-check" class="w-5 h-5" mini />'))
-                ->tooltip(__('users.actions.assign_admin_role'))
-                ->class('text-gray-500')
-                ->dispatch('assignAdminRoleAction', ['id' => $user->id]),
-            Button::add('removeAdminRoleAction')
-                ->slot(Blade::render('<x-wireui-icon name="shield-check" class="w-5 h-5" mini />'))
-                ->tooltip(__('users.actions.remove_admin_role'))
-                ->class('text-green-500')
-                ->dispatch('removeAdminRoleAction', ['id' => $user->id]),
-            Button::add('assignWorkerRoleAction')
-                ->slot(Blade::render('<x-wireui-icon name="cube" class="w-5 h-5" mini />'))
-                ->tooltip(__('users.actions.assign_worker_role'))
-                ->class('text-gray-500')
-                ->dispatch('assignWorkerRoleAction', ['id' => $user->id]),
-            Button::add('removeWorkerRoleAction')
-                ->slot(Blade::render('<x-wireui-icon name="cube" class="w-5 h-5" mini />'))
-                ->tooltip(__('users.actions.remove_worker_role'))
-                ->class('text-green-500')
-                ->dispatch('removeWorkerRoleAction', ['id' => $user->id]),
+            Button::add('show_user')
+            ->slot(Blade::render('<x-wireui-icon name="pencil" class="w-5 h-5" mini />'))
+            ->tooltip(__('users.actions.show_user'))
+            ->class('text-green-500')
+            ->route('users.show', [$user]),
+
+        Button::add('edit_user')
+            ->slot(Blade::render('<x-wireui-icon name="pencil" class="w-5 h-5" mini />'))
+            ->tooltip(__('users.actions.edit_user'))
+            ->class('text-yellow-500')
+            //->can($this->authorize('create', Order::class))
+            ->route('users.edit', [$user]),
+
+        Button::add('remove_user')
+            ->slot(Blade::render('<x-wireui-icon name="x-mark" class="w-5 h-5" mini />'))
+            ->tooltip(__('users.actions.remove_user'))
+            ->class('text-red-500')
+            ->dispatch('remove_user', ['id' => $user->id]),
         ];
     }
 

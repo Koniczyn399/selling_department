@@ -25,7 +25,7 @@ return [
         
     ],
     'attributes' => [
-        'actions' => 'Akcje',
+        'actions' => '',
         'created_at' => 'Utworzono',
         'updated_at' => 'Zaktualizowano',
         'deleted_at' => 'Usunięto',

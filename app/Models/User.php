@@ -77,13 +77,4 @@ class User extends Authenticatable
         ];
     }
 
-    public function commissions()
-    {
-        return $this->hasMany(Order::class, 'commission_id');
-    }
-
-    public function orders()
-    {
-        return $this->belongsTo(Order::class, 'order_id');
-    }
 }

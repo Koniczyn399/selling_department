@@ -13,7 +13,7 @@
                 
                     <livewire:users.user-form :user="$user" :show="$show" />
                 @else
-                    <livewire:users.user-form :show="$show" />
+                    <livewire:users.user-form />
                 @endif
             </div>
         </div>

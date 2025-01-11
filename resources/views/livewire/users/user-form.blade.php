@@ -1,4 +1,5 @@
 <div class="p-2">
+@if (!$show)
     <form wire:submit.prevent="submit">
         <h3 class="text-xl font-semibold leading-tight text-gray-800">
             @if (isset($id))
@@ -89,6 +90,8 @@
 
         </div>
 
+        
+
         <hr class="my-2">
         <div class="flex justify-end pt-2">
             <x-wireui-button href="{{ route('users.index') }}" secondary class="mr-2"
@@ -96,4 +99,25 @@
             <x-wireui-button type="submit" primary label="{{ __('translation.placeholder.save') }}" spinner />
         </div>
     </form>
+@else
+
+
+
+                    @foreach ( $user as $data)
+                     
+                        {{$data->name }}
+                        {{$data->last_name }}
+                        {{ __('users.attributes.phone_number') }}: {{ $data->phone_number }} <br>
+                        {{ __('users.attributes.email') }}: {{ $data->email }}<br>
+                        {{ __('users.attributes.nip') }}: {{ $data->nip }}<br>
+                        {{ __('users.attributes.city') }}: {{ $data->city }}<br>
+                        {{ __('users.attributes.street') }}: {{ $data->street }}<br>
+                        {{ __('users.attributes.post_code') }}: {{ $data->post_code }}<br>
+                        {{ __('users.attributes.street_number') }}: {{ $data->street_number }}<br>
+                        {{ __('users.attributes.description') }}: {{ $data->description }}<br>
+                       
+                    @endforeach
+
+
+@endif
 </div>

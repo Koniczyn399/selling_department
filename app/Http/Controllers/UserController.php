@@ -32,7 +32,9 @@ class UserController extends Controller
         //$this->authorize('create', User::class);
 
         return view(
-            'users.form'
+            'users.form',[
+                'show'=> false,
+            ]
         );
     }
 
@@ -45,6 +47,20 @@ class UserController extends Controller
             'users.form',
             [
                 'user'=> $user,
+                'show'=> false,
+            ]
+        );
+    }
+
+    public function show(User $user)
+    {
+        //$this->authorize('update', $user);
+
+        return view(
+            'users.show',
+            [
+                'user'=> $user,
+                'show'=> true,
             ]
         );
     }

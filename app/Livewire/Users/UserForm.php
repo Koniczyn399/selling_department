@@ -15,6 +15,9 @@ class UserForm extends Component
 
     public $id = null;
     public $name = "";
+
+    public $email = "";
+
     public $last_name = "";
     public $nip = "";
     public $post_code = "";
@@ -23,15 +26,17 @@ class UserForm extends Component
     public $street_number = "";
     public $phone_number = "";
     public $description="";
+    public $show=false;
 
-    public function mount(User $user = null)
+    public function mount(User $user = null, $show)
     {
 
         //dd($manufacturer);
 
         $this->user = $user;
+        $this->show = $show;
 
-        if (isset($manufacturer->id)) {
+        if (isset($user->id)) {
             $this->id = $user->id;
             $this->name = $user->name;
             $this->last_name = $user->last_name;
@@ -42,7 +47,11 @@ class UserForm extends Component
             $this->street_number = $user->street_number;
             $this->phone_number = $user->phone_number;
             $this->description = $user->description;
+            $this->email = $user->email;
 
+            if($show){
+                $user = User::findOrFail($user->id);
+            }
         }
     }
 
