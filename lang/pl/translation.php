@@ -4,22 +4,24 @@ use App\Enums\Auth\RoleType;
 
 return [
     'navigation' => [
-        'rooms' => 'Pokoje',
-        'users' => 'Użytkownicy',
+        'users' => 'Klienci',
+        'clients' => 'Klienci',
         'categories' => 'Kategorie',
         'komponents' => 'Komponenty',
         'devices' => 'Urządzenia',
         'manufacturers' => 'Producenci',
         'orderstates' => 'Stany zamównień',
         'orders'=> 'Zamówienia',
-        'commissionkomponents'=> 'Pozycje zlecenia',
-        'products'=> 'Produkty',
-        'commissionservices'=> 'Usługi zlecenia',
+
+        'products'=> 'Towary',
+
         'orderproducts'=> 'Zamówienia produktów ',
         'orderdetails'=> 'Szczegóły zamówienia ',
-        'services'=>'Usługi',
-        'commissions'=> 'Zlecenia',
-        'others'=> 'Pozostałe'
+
+
+        'others'=> 'Pozostałe',
+        
+        'account' =>'Konto'
         
     ],
     'attributes' => [
@@ -36,7 +38,7 @@ return [
     'placeholder' => [
         'enter' => 'Wprowadź',
         'select' => 'Wybierz',
-        'save' => 'Zapisz',
+        'save' => 'Zatwierdź',
         'cancel' => 'Anuluj'
     ],
     'messages' => [

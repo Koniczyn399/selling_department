@@ -26,14 +26,31 @@ class UserController extends Controller
         );
     }
 
-    public function search_user()
-    {
-        $users= User::query()->select([
-            'users.id',
-            'users.name',
-        ])->get();
 
-        //$users= User::orderBy('id','desc')->get();
-        return $users;
+    public function create()
+    {
+        //$this->authorize('create', User::class);
+
+        return view(
+            'users.form'
+        );
     }
+
+
+    public function edit(User $user)
+    {
+        //$this->authorize('update', $user);
+
+        return view(
+            'users.form',
+            [
+                'user'=> $user,
+            ]
+        );
+    }
+
+
+
+
+  
 }

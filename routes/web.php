@@ -36,11 +36,17 @@ Route::middleware([
             ->name('index');
     });
 
+    Route::resource('users', UserController::class)->only([
+        'create',
+        'edit',
+    ]);
+
     Route::resource('manufacturers', ManufacturerController::class)->only([
         'index',
         'create',
         'edit',
     ]);
+
     Route::resource('categories', CategoryController::class)->only([
         'index',
         'create',
@@ -73,10 +79,7 @@ Route::middleware([
         'create',
         'edit',
     ]);
-    Route::get('orderproducts/anihilate', [OrderProductController::class, 'anihilate'])->name('orderproducts.anihilate');
 
-    Route::get('categories/search', [CategoryController::class, 'search'])->name('categories.search');
-    Route::get('manufacturers/search', [ManufacturerController::class, 'search'])->name('manufacturers.search');
 });
 
 /**

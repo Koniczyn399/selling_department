@@ -56,44 +56,41 @@ final class UserTable extends PowerGridComponent
         return PowerGrid::fields()
             ->add('id')
             ->add('name')
-            ->add('email')
-            ->add('created_at')
-            ->add('created_at_formatted', function ($user) {
-                return Carbon::parse($user->created_at)->format('Y-m-d H:i');
-            })
-            ->add('verified_at')
-            ->add('verified_at_formatted', function ($user) {
-                return Carbon::parse($user->email_verified_at)->format('Y-m-d H:i');
-            })
-            ->add('joined_roles', function ($user) {
-                return $user->roles->pluck('name')
-                    ->map(function ($roleName) {
-                        return __('translation.roles.' . $roleName);
-                    })->join(', ');
-            });
+            ->add('last_name')
+            ->add('nip')
+            ->add('post_code')
+            ->add('city')
+           
+            ;
     }
 
     public function columns(): array
     {
         return [
-            Column::make(__('users.attributes.id'), 'id'),
+            Column::make(__('users.attributes.id'), 'id')
+            ->sortable()
+            ->searchable(),
             Column::make(__('users.attributes.name'), 'name')
                 ->sortable()
                 ->searchable(),
 
-            Column::make(__('users.attributes.email'), 'email')
-                ->sortable()
-                ->searchable(),
+        Column::make(__('users.attributes.last_name'), 'last_name')
+            ->sortable()
+            ->searchable(),
 
-            Column::make('Created at', 'created_at_formatted', 'created_at')
-                ->sortable()
-                ->searchable(),
+            Column::make(__('users.attributes.nip'), 'nip')
+            ->sortable()
+            ->searchable(),
 
-            Column::make('Verified at', 'verified_at_formatted', 'email_verified_at')
-                ->sortable()
-                ->searchable(),
+            Column::make(__('users.attributes.post_code'), 'post_code')
+            ->sortable()
+            ->searchable(),
 
-            Column::make(__('users.attributes.roles'), 'joined_roles'),
+            Column::make(__('users.attributes.city'), 'city')
+            ->sortable()
+            ->searchable(),
+
+
 
             Column::action(__('translation.attributes.actions')),
         ];

@@ -4,45 +4,28 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-mark class="block h-9 w-auto" />
-                    </a>
-
-                </div>
-
+ 
                 
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-4 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Dział Sprzedaży') }}
                     </x-nav-link>
+
+                    
+                    @can('order_access')
+                        <x-nav-link href="{{ route('orders.index') }}" :active="request()->routeIs('orders.index')">
+                            {{ __('translation.navigation.orders') }}
+                        </x-nav-link>
+                    @endcan
 
 
                     @can('user_access')
                         <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
-                            {{ __('translation.navigation.users') }}
+                            {{ __('translation.navigation.clients') }}
                         </x-nav-link>
                     @endcan
-
-                    @can('category_access')
-                        <x-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
-                            {{ __('translation.navigation.categories') }}
-                        </x-nav-link>
-                    @endcan
-
-                    @can('manufacturer_access')
-                        <x-nav-link href="{{ route('manufacturers.index') }}" :active="request()->routeIs('manufacturers.index')">
-                            {{ __('translation.navigation.manufacturers') }}
-                        </x-nav-link>
-                    @endcan
-
-                    @can('orderstate_access')
-                        <x-nav-link href="{{ route('orderstates.index') }}" :active="request()->routeIs('orderstates.index')">
-                            {{ __('translation.navigation.orderstates') }}
-                        </x-nav-link>
-                    @endcan   
 
                     @can('product_access')
                         <x-nav-link href="{{ route('products.index') }}" :active="request()->routeIs('products.index')">
@@ -50,32 +33,7 @@
                         </x-nav-link>
                     @endcan
 
-                    @can('order_access')
-                        <x-nav-link href="{{ route('orders.index') }}" :active="request()->routeIs('orders.index')">
-                            {{ __('translation.navigation.orders') }}
-                        </x-nav-link>
-                    @endcan
-
-                    @can('order_product_access')
-
-                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">{{ __('translation.navigation.others') }}
-                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                        </svg>
-                    </button>
-
-                    <!-- Dropdown menu -->
-                    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-
-                            <li>
-                                <a href="{{ route('orderproducts.index') }}"  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :active="request()->routeIs('orderproducts.index')">{{ __('translation.navigation.orderproducts') }}</a>
-                            </li>
-        
-                        </ul>
-                    </div>
-                    @endcan
-
+                
                                 
 
                 </div>
@@ -139,7 +97,7 @@
                     </div>
                 @endif
 
-                <!-- Settings Dropdown -->
+                <!-- Settings Dropdown PRZYCISK KONTO -->
                 <div class="ms-3 relative">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
@@ -153,7 +111,7 @@
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
                                         class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                                        {{ Auth::user()->name }}
+                                        {{ __('translation.navigation.account') }}
 
                                         <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                             fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
