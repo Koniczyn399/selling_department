@@ -14,7 +14,7 @@ return[
 
         'email'=>'Adres e-mail',
 
-        'description'=>'Opis:',
+        'description'=>'Opis',
         'roles'=>'Role',
     ],
     'actions' => [

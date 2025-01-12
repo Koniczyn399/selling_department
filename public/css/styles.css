@@ -1,0 +1,83 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.gorny_box{
+    display: flex;
+}
+.lewo_napis{
+    padding: 0px;
+    font-size: 20px;
+}
+.zamowienia{
+    padding: 0px;
+    padding-left: 310px;
+    padding-right: 15px;
+}
+.klienci{
+    padding: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.towary{
+    padding: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+button{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 0px;
+    background-color: rgb(156, 158, 154);
+    color: white;
+    border-radius: 10px;
+    height: 50px;
+    border: 0;
+}
+button:active{
+    background-color: rgb(125, 126, 123);
+}
+.imie{
+    padding-top: 5px;
+    font-size: 60px;
+    margin: 0px;
+}
+.table_div{
+    padding: 0px;
+}
+table,th,tr{
+    background-color: rgb(245, 245, 245);
+    border-collapse: collapse;
+}
+.right_table{
+    width: 600px;
+    text-align: left;
+    height: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 10px;
+}
+.left_table{
+    width: 200px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.button_divbox{
+    display: flex;
+    justify-content: end;
+    width: 800px;
+}
+.edit,.delete,.next{
+    padding: 15px;
+}
+.content{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+th{
+    border: 1px solid;
+}
+table{
+    border: 2px solid white;
+}

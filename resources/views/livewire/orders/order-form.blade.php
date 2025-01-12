@@ -1,4 +1,3 @@
-
 <div class="p-2">
     <form wire:submit.prevent="submit">
         <h3 class="text-xl font-semibold leading-tight text-gray-800">

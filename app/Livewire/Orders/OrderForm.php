@@ -13,7 +13,6 @@ class OrderForm extends Component
     use WireUiActions;
 
     public Order $order;
-
     public $users;
     public $products;
     
@@ -26,15 +25,13 @@ class OrderForm extends Component
 
 
     public function mount(Order $order = null, $users, $products){
-
-        
       
         $this->order =$order;
         $this->users =$users;
         $this->products =$products;
 
 
-            if (isset($order->id)) {
+            if (isset($order)) {
                 $this->id = $order->id;
                 $this->client_id = $order->client_id;
                 $this->seller_id = $order->seller_id;

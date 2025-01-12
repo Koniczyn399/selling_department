@@ -117,10 +117,6 @@ class OrderController extends Controller
     {
         $this->authorize('create', $order);
 
-
-
-
-
         $users= User::query()->select([
             'users.id',
             'users.name',
@@ -130,6 +126,7 @@ class OrderController extends Controller
             'products.id',
             'products.product_name',
         ])->get();
+        
         return view(
             'orders.form',
             [
