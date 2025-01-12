@@ -38,23 +38,7 @@ final class ProductTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return Product::query()
-            ->join('categories', function ($categories) {
-                $categories->on('products.category_id', '=', 'categories.id');
-            })
-            ->join('manufacturers', function ($manufacturers) {
-                $manufacturers->on('products.manufacturer_id', '=', 'manufacturers.id');
-            })
-            ->select([
-                'products.id',
-                'categories.category_name',
-                'products.product_name',
-                'products.price',
-                'products.unit',
-                'products.amount',
-                'products.description',
-                'manufacturers.manufacturer_name',
-            ]);
+        return Product::query();
     }
 
     public function relationSearch(): array
@@ -72,15 +56,9 @@ final class ProductTable extends PowerGridComponent
 
         return PowerGrid::fields()
             ->add('id')
-            ->add('category_name')
-            ->add('manufacturer_name')
             ->add('product_name')
-            ->add('price')
-            ->add('unit')
-            ->add('amount')
-            ->add('description')
-            ->add('created_at')
-            ->add('created_at_formatted', fn(Product $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+            ->add('description');
+
     }
 
     public function columns(): array
@@ -89,26 +67,11 @@ final class ProductTable extends PowerGridComponent
         return [
             Column::make(__('products.attributes.product_id'), 'id')
                 ->sortable(),
-
-            Column::make(__('categories.attributes.category_name'), 'category_name')
-                ->sortable()
-                ->searchable(),
-            Column::make(__('manufacturers.attributes.manufacturer_name'), 'manufacturer_name')
-                ->sortable(),
-
             Column::make(__('products.attributes.product_name'), 'product_name'),
-            Column::make(__('products.attributes.price'), 'price'),
-            Column::make(__('products.attributes.unit'), 'unit'),
-            Column::make(__('products.attributes.amount'), 'amount'),
+        
             Column::make(__('products.attributes.description'), 'description'),
 
-            Column::make('Created at', 'created_at')
-                ->hidden(),
-
-            Column::make('Created at', 'created_at_formatted', 'created_at')
-                ->searchable(),
-
-            Column::action('Action')
+            Column::action(__('translation.attributes.actions')),
         ];
     }
 
@@ -129,10 +92,16 @@ final class ProductTable extends PowerGridComponent
     public function actions(Product $product): array
     {
         return [
+            Button::add('show_product')
+            ->slot(Blade::render('<x-wireui-icon name="pencil" class="w-5 h-5" mini />'))
+            ->tooltip(__('products.actions.show_product'))
+            ->class('text-green-500')
+            ->route('products.show', [$product]),
+
             Button::add('editCommissionAction')
                 ->slot(Blade::render('<x-wireui-icon name="pencil" class="w-5 h-5" mini />'))
                 ->tooltip(__('products.actions.edit_product_action'))
-                ->class('text-green-500')
+                ->class('text-yellow-500')
                 ->route('products.edit', [$product]),
 
             Button::add('removeProductAction')

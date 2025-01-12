@@ -2,14 +2,17 @@
 
 return [
     'attributes' => [
-        'order_id' => 'ID',
+        'order_id' => 'Numer',
         'client_name' => 'Klient',
         'worker_name' => 'Pracownik',
         'order_state_name' => 'Stan zamówienia',
-        'deadline_of_completion' => 'Termin realizacji',
-        'date_of_completion' => 'Data realizacji',
+        'date' => 'Data',
+        'date_of_order' => 'Data zamówienia',
+        'seller_name' => 'Sprzedawca',
+        'joint_amount' =>'Kwota łączna',
         'price' => 'Cena',
         'description' => 'Opis',
+        'products' =>'Produkty',
 
     ],
     'actions' => [
@@ -20,13 +23,13 @@ return [
         'show_order_detail_action' => 'Pokaż zamówienie',
         'create' => 'Dodaj zamówienie',
         'category_name' => 'Nazwa kategorii',
-        'choose_client' => 'Wybierz klienta',
-        'choose_worker' => 'Wybierz pracownika',
-        'choose_order_state' => 'Wybierz stan',
+        'choose_client' => 'Wprowadź klienta',
+        'choose_seller' => 'Wprowadź sprzedawcę',
+        'choose_product' => 'Wprowadź produkt',
 
     ],
     'labels' => [
-        'create_form_title' => 'Tworzenie nowego zamówienia',
+        'create_form_title' => 'Dodawanie zamówienia',
         'edit_form_title' => 'Edycja zamówienia',
     ],
     'messages' => [

@@ -2,13 +2,13 @@
 
 return [
     'attributes' => [
-        'product_id' => 'ID',
-        'category_name' => 'Nazwa kategorii',
+        'product_id' => 'id',
+
         'manufacturer_name' => 'Nazwa producenta',
         'manufacturer_id' => 'ID Producenta',
-        'product_name' => 'Nazwa produktu',
+        'product_name' => 'Nazwa ',
         'price' => 'Cena',
-        'unit' => 'Jednostka',
+        'unit' => 'Jednostka miary',
         'amount' => 'Ilość',
         'description' => 'Opis',
 
@@ -23,8 +23,8 @@ return [
 
     ],
     'labels' => [
-        'create_form_title' => 'Tworzenie nowgo produktu',
-        'edit_form_title' => 'Edycja produktu',
+        'create_form_title' => 'Dodawanie towaru',
+        'edit_form_title' => 'Edycja towaru',
     ],
     'messages' => [
         'successes' => [

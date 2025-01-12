@@ -61,6 +61,7 @@ Route::middleware([
         'index',
         'create',
         'edit',
+        'show',
     ]);
   
 

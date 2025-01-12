@@ -23,7 +23,9 @@ return new class extends Migration
             $table->string('street');
             $table->string('street_number');
             $table->string('post_code');
-            $table->string('description')->nullable();;
+            $table->string('description')->nullable();
+
+            $table->string('position')->nullable();
 
             $table->string('password');
             $table->rememberToken();

@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\User;
-use App\Models\Device;
-use App\Models\OrderState;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,23 +21,13 @@ class OrderFactory extends Factory
     {
         return [
             'client_id' => User::select('id')->orderByRaw('RAND()')->first()->id,
-            'worker_id' => User::select('id')->orderByRaw('RAND()')->first()->id,
-            'order_state_id' => OrderState::select('id')->orderByRaw('RAND()')->first()->id,
+            'seller_id' => User::select('id')->orderByRaw('RAND()')->first()->id,
+          
+            'date_of_order' => $this->faker->dateTimeBetween(
+                '- 8 weeks',
+                '- 4 week',
+            ),
             
-            'date_of_completion' => $this->faker->dateTimeBetween(
-                '- 8 weeks',
-                '- 4 week',
-            ),
-            'deadline_of_completion' => $this->faker->dateTimeBetween(
-                '- 8 weeks',
-                '- 4 week',
-            ),
-
-     
-            'price' => $this->faker->numberBetween( 40,5000),
-        
-            'description' => $this->faker->word(),
-
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 week',
@@ -53,5 +43,14 @@ class OrderFactory extends Factory
                 )
                 : null,
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Order $order) {
+            $order->products()->attach(
+                Product::select('id')->orderByRaw('RAND()')->limit(rand(1, 3))->get()
+            );
+        });
     }
 }

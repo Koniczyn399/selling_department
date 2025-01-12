@@ -19,12 +19,10 @@ class Order extends Model
 
     protected $fillable = [
                             "client_id",
-                            "worker_id",
-                            "order_state_id",
-                            "date_of_completion",
-                            "deadline_of_completion",
-                            "price",
-                            "description",
+                            "seller_id",
+
+                            "date_of_order",
+
                         ];
 
     public function users()
@@ -33,13 +31,8 @@ class Order extends Model
     }
 
 
-    public function order_states()
+    public function products()
     {
-        return $this->belongsTo(OrderState::class,'order_state_id');
-    }
-
-    public function orderproducts()
-    {
-        return $this->hasMany(OrderProduct::class);
+        return $this->belongsToMany(Product::class);
     }
 }

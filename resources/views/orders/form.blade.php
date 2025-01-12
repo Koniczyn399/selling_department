@@ -11,9 +11,9 @@
               
                 @if (isset($order->id)) 
                 
-                    <livewire:orders.order-form :order="$order" :users="$users" :orderstates="$orderstates" />
+                    <livewire:orders.order-form :order="$order" :users="$users" :products="$products" />
                 @else
-                    <livewire:orders.order-form :users="$users" :orderstates="$orderstates" />
+                    <livewire:orders.order-form :users="$users" :products="$products" />
                 @endif
             </div>
         </div>

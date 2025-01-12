@@ -15,9 +15,7 @@ class UserForm extends Component
 
     public $id = null;
     public $name = "";
-
     public $email = "";
-
     public $last_name = "";
     public $nip = "";
     public $post_code = "";
@@ -25,7 +23,7 @@ class UserForm extends Component
     public $street = "";
     public $street_number = "";
     public $phone_number = "";
-    public $description="";
+    public $description = "";
 
 
     public function mount(User $user = null)
@@ -113,7 +111,7 @@ class UserForm extends Component
             'street_number' => [
                 'required',
                 'string',
-                'min:2',
+                'min:1',
 
             ],
 

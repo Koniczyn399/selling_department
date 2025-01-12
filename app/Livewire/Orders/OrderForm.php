@@ -15,35 +15,33 @@ class OrderForm extends Component
     public Order $order;
 
     public $users;
-    public $orderstates;
+    public $products;
     
     public $id =null;
     public $client_id = "";
-    public $worker_id = "";
-    public $order_state_id = "";
-    public $deadline_of_completion = "";
-    public $date_of_completion="";
-    public $price = "";
-    public $description = "";
+    public $seller_id = "";
 
-    public function mount(Order $order = null, $users, $orderstates){
+    public $product_ids = [];
+    public $date_of_order="";
+
+
+    public function mount(Order $order = null, $users, $products){
 
         
       
         $this->order =$order;
         $this->users =$users;
-        $this->orderstates =$orderstates;
+        $this->products =$products;
 
 
             if (isset($order->id)) {
                 $this->id = $order->id;
                 $this->client_id = $order->client_id;
-                $this->worker_id = $order->worker_id;
-                $this->order_state_id = $order->order_state_id;
-                $this->deadline_of_completion = $order->deadline_of_completion;
-                $this->date_of_completion = $order->date_of_completion;
-                $this->price = $order->price;
-                $this->description = $order->description;
+                $this->seller_id = $order->seller_id;
+
+
+                $this->date_of_order = $order->date_of_order;
+                $this->product_ids = $order->products->pluck('id')->toArray();
             }
         //dd($order);
     }
@@ -76,32 +74,18 @@ class OrderForm extends Component
                 'required',
                 'integer',
             ],
-            'order_state_id' => [
+
+
+            'product_ids' => [
                 'required',
-                'integer',
+                'array',
             ],
 
-            'deadline_of_completion' => [
+            'date_of_order' => [
                 'date',
 
             ],
 
-            'date_of_completion' => [
-                'date',
-
-            ],
-            'price' => [
-                'required',
-                'numeric',
-                'gt:0',
-                'max:10000',
-            ],
-
-            'description' => [
-                'required',
-                'string',
-                'min:2',
-            ],
 
         ];
     }
@@ -109,7 +93,7 @@ class OrderForm extends Component
     public function validationAttributes()
     {
         return [
-            'order_state_name' => Str::lower(__('orderstates.attributes.order_state_name')),
+            'date_of_order' => Str::lower(__('orders.attributes.date_of_order')),
         ];
     }
     public function render()

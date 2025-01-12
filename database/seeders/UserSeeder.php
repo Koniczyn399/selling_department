@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
-        User::factory(15)->create();
+        User::factory(25)->create();
 
         User::factory()->create([
             'name' => 'Test User',
@@ -30,6 +30,7 @@ class UserSeeder extends Seeder
             'description' => 'Test User',
             'email' => 'test@user.com',
             'password' => Hash::make('12345678'),
+            'position' => 'test_user',
         ])->assignRole(RoleType::USER->value);
 
         User::factory()->create([
@@ -42,6 +43,7 @@ class UserSeeder extends Seeder
             'post_code' => 'Test User',
             'description' => 'Test User',
             'email' => 'test@worker.com',
+            'position' => 'test_worker',
             'password' => Hash::make('12345678'),
         ])->assignRole(RoleType::WORKER->value);
 
@@ -55,6 +57,7 @@ class UserSeeder extends Seeder
             'post_code' => 'Test User',
             'description' => 'Test User',
             'email' => 'test@admin.com',
+            'position' => 'test_admin',
             'password' => Hash::make('12345678'),
         ])->assignRole(RoleType::ADMIN->value);
     }

@@ -19,8 +19,6 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_id' => Category::select('id')->orderByRaw('RAND()')->first()->id,
-            'manufacturer_id' => Manufacturer::select('id')->orderByRaw('RAND()')->first()->id,
 
             'product_name' => fake()->unique()->word(),
             

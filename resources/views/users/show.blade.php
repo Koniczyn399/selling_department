@@ -1,4 +1,12 @@
 <x-app-layout>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{{ URL::asset('css/styles.css') }}" rel="stylesheet" type="text/css" > 
+</head>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('translation.navigation.users') }}

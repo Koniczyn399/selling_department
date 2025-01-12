@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\OrderState;
 use App\Models\OrderProduct;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
-use App\Models\OrderState;
 
 class OrderController extends Controller
 {
@@ -35,11 +36,12 @@ class OrderController extends Controller
     public function create()
     {
         $this->authorize('create', Order::class);
-        $this->authorize('viewAny', User::class);
-        $this->authorize('viewAny', OrderState::class);
-        $orderstates= OrderState::query()->select([
-            'order_states.id',
-            'order_states.order_state_name',
+
+
+
+        $products = Product::query()->select([
+            'products.id',
+            'products.product_name',
         ])->get();
         $users= User::query()->select([
             'users.id',
@@ -49,7 +51,7 @@ class OrderController extends Controller
             'orders.form',
             [
                 "users"=>$users,
-                "orderstates"=>$orderstates
+                "products"=>$products,
             ]
         );
     }
@@ -70,52 +72,37 @@ class OrderController extends Controller
         $this->authorize('show', $order);
         //dd($order);
 
-        $id =$order->id;
-
+    
         $single_order= Order::query()
-        ->join('users as workers', function ($users) {
-            $users->on('orders.worker_id', '=', 'workers.id');
-        })
         ->join('users as clients', function ($users) {
             $users->on('orders.client_id', '=', 'clients.id');
+        })->join('users as sellers', function ($users) {
+            $users->on('orders.seller_id', '=', 'sellers.id');
         })
-          ->join('order_states', function ($order_states) {
-            $order_states->on('orders.order_state_id', '=', 'order_states.id');
-        })
-        ->select([
-        'orders.id',
-        'orders.worker_id',
-        'workers.name as worker_name',
-        'clients.name as client_name',
-        'order_states.order_state_name',
-        'orders.price',
-        'orders.deadline_of_completion',
-        'orders.date_of_completion',
-        'orders.description',
+          ->select([
+            'orders.id',            
+            'clients.name as client_name',
+            'clients.last_name as client_last_name',
 
-        ])->where('orders.id', '=', $id)->paginate(config('pagination.default'));
+            'sellers.name as seller_name',
+            'sellers.last_name as seller_last_name',
+
+            'orders.date_of_order',
+            'users.position as position' ,
+
+        ])->where('orders.id', '=', $order->id)->paginate(config('pagination.default'));
 
         //dd($single_order);
 
-        $OrderProducts= OrderProduct::query()
-        ->join('products', function ($products) {
-            $products->on('order_products.product_id', '=', 'products.id');
-        })
-        ->select([
-            'order_products.id',
-            'order_products.order_id',
-            'products.product_name',
-            'order_products.price',
-            'order_products.amount',
-            'order_products.description',
-        ])->where('order_products.order_id', '=', $id)->paginate(config('pagination.default'));
+     
 
         //dd($OrderProducts);
         return view(
             'orders.show',
             [
-                'OrderProducts'=>$OrderProducts,
+               
                 'single_order' =>$single_order,
+                'order' =>$order,
 
             ]
         );
@@ -129,8 +116,9 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $this->authorize('create', $order);
-        $this->authorize('viewAny', User::class);
-        $this->authorize('viewAny', OrderState::class);
+
+
+
 
 
         $users= User::query()->select([
@@ -138,17 +126,16 @@ class OrderController extends Controller
             'users.name',
         ])->get();
 
-        $orderstates= OrderState::query()->select([
-            'order_states.id',
-            'order_states.order_state_name',
+        $products = Product::query()->select([
+            'products.id',
+            'products.product_name',
         ])->get();
-
         return view(
             'orders.form',
             [
                 'order'=> $order,
                 'users'=>$users,
-                'orderstates'=>$orderstates,
+                'products'=>$products,
             ]
         );
     }

@@ -22,27 +22,14 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('no action');
             
-            $table->unsignedBigInteger('worker_id');
-            $table->foreign('worker_id')
+            $table->unsignedBigInteger('seller_id');
+            $table->foreign('seller_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('no action');
-
-
-            $table->unsignedBigInteger('order_state_id');
-            $table->foreign('order_state_id')
-                ->references('id')
-                ->on('order_states')
-                ->onDelete('no action');
-
             
-            
-            $table->timestamp('date_of_completion', precision: 0);
-            $table->timestamp('deadline_of_completion', precision: 0);
- 
+            $table->timestamp('date_of_order', precision: 0);
 
-            $table->string('price', 7);
-            $table->string('description', 25);
           
             $table->timestamps();
             $table->softDeletes();

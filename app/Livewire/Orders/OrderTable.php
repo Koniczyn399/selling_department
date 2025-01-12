@@ -34,29 +34,20 @@ final class OrderTable extends PowerGridComponent
     public function datasource(): Builder
     {
         return Order::query()
-        ->join('users as workers', function ($users) {
-            $users->on('orders.worker_id', '=', 'workers.id');
-        })
         ->join('users as clients', function ($users) {
             $users->on('orders.client_id', '=', 'clients.id');
         })
-          ->join('order_states', function ($order_states) {
-            $order_states->on('orders.order_state_id', '=', 'order_states.id');
-        })
-
           ->select([
             'orders.id',
-            'orders.worker_id',
-            'workers.name as worker_name',
+            
             'clients.name as client_name',
-            'order_states.order_state_name',
+            'clients.last_name as client_last_name',
 
-            'orders.price',
-            'orders.deadline_of_completion',
-            'orders.date_of_completion',
-            'orders.description',
+
+            'orders.date_of_order',
 
           ]);
+          //])->select("CONCAT(clients.name,' ',clients.last_name) as fullname");
     }
 
     
@@ -78,51 +69,33 @@ final class OrderTable extends PowerGridComponent
     {
         return PowerGrid::fields()
         ->add('id')
-        ->add('worker_name')
-        ->add('client_name')
-        ->add('order_state_name')
-        ->add('deadline_of_completion')
-        ->add('date_of_completion')
-        ->add('price')
-        ->add('description')
-        ->add('created_at')
-        ->add('created_at_formatted', fn(Order $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+        ->add('fullname', function (Order $order){
+            return $order->client_name. " ".$order->client_last_name ;
+        })
+        ->add('date_of_order')
+        ->add('joint_amount', function ($order) {
+            return $order->products->pluck('price')->sum();
+        });
+
     }
 
     public function columns(): array
     {
         return [
             Column::make(__('orders.attributes.order_id'), 'id'),
-            Column::make(__('orders.attributes.client_name'), 'client_name'),
 
-            Column::make(__('orders.attributes.worker_name'), 'worker_name'),
 
-            Column::make(__('orders.attributes.order_state_name'), 'order_state_name'),
-
-            Column::make(__('commissions.attributes.deadline_of_completion'), 'deadline_of_completion')
+            Column::make(__('orders.attributes.date'), 'date_of_order')
                 ->hidden(),
 
-            Column::make(__('commissions.attributes.deadline_of_completion'), 'deadline_of_completion', 'deadline_of_completion')
-                ->searchable(),
+            Column::make(__('orders.attributes.date'), 'date_of_order', 'date_of_order'),
 
-            Column::make(__('commissions.attributes.date_of_completion'), 'date_of_completion')
-                ->hidden(),
-
-            Column::make(__('commissions.attributes.date_of_completion'), 'date_of_completion', 'date_of_completion')
-                ->searchable(),
+            
+            Column::make(__('orders.attributes.joint_amount'), 'joint_amount'),
 
 
-            Column::make(__('orders.attributes.price'), 'price'),
+            Column::make(__('orders.attributes.client_name'), 'fullname'),
 
-            Column::make(__('commissions.attributes.description'), 'description'),
-
-
-
-            Column::make('Created at', 'created_at')
-                ->hidden(),
-
-            Column::make('Created at', 'created_at_formatted', 'created_at')
-                ->searchable(),
 
             Column::action(__('translation.attributes.actions')),
         ];

@@ -32,8 +32,7 @@ class ProductController extends Controller
     public function create()
     {
         $this->authorize('create', Product::class);
-        $this->authorize('viewAny', Category::class);
-        $this->authorize('viewAny', Manufacturer::class);
+
 
         $categories= Category::query()->select([
             'categories.id',
@@ -67,7 +66,14 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        //$this->authorize('update', $user);
+
+        return view(
+            'products.show',
+            [
+                'product'=> $product,
+            ]
+        );
     }
 
     /**

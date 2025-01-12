@@ -3,16 +3,16 @@
 return[
     'attributes' =>[
         'id'=> 'ID',
-        'name'=>'Imię*: ',
-        'phone_number' =>'Nr telefonu*:',
-        'last_name'=>'Nazwisko*:',
-        'nip'=>'NIP:',
-        'post_code'=>'Kod pocztowy*:',
-        'city'=>'Miasto*:',
-        'street'=>'Ulica*:',
-        'street_number'=>'Numer domu*:',
+        'name'=>'Imię',
+        'phone_number' =>'Nr telefonu',
+        'last_name'=>'Nazwisko',
+        'nip'=>'NIP',
+        'post_code'=>'Kod pocztowy',
+        'city'=>'Miasto',
+        'street'=>'Ulica',
+        'street_number'=>'Numer domu',
 
-        'email'=>'Adres e-mail*:',
+        'email'=>'Adres e-mail',
 
         'description'=>'Opis:',
         'roles'=>'Role',
