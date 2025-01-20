@@ -2,6 +2,8 @@
 
 namespace App\Livewire\OrderProducts;
 
+use App\Models\Order;
+use App\Models\Product;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\OrderProduct;
@@ -19,25 +21,48 @@ class OrderProductForm extends Component
     public $order_id = "";
     public $product_id = "";
     public $amount = "";
-    public $price = "";
-    public $description = "";
 
-    public function mount(OrderProduct $orderproduct = null, $orders, $products ){
 
-       
+    public $order_created =false;
+    public $new_id =null;
+ 
+
+    public function mount(OrderProduct $orderproduct = null, $new_id=null ){
+
+        if(isset($new_id))
+        {
+            $this->order_id = $new_id;
+            $this->order_created = true;
+            $this->new_id = $new_id;
+        }
+
+        $orders = Order::query()->join('users as clients', first: function ($users) {
+            $users->on('orders.client_id', '=', 'clients.id');
+        })->select([
+            'orders.id',
+            'clients.name as client_name',
+            'clients.last_name as client_last_name',
+        ])->get();
+
+        $products = Product::query()->select([
+            'products.id',
+            'products.product_name',
+            'products.price'
+        ])->get();
       
         $this->orderproduct = $orderproduct;
         $this->orders = $orders;
         $this->products = $products;
+     
 
-            if (isset($orderproduct->id)) {
-                $this->id = $orderproduct->id;
-                $this->order_id = $orderproduct->order_id;
-                $this->product_id = $orderproduct->product_id;
-                $this->amount = $orderproduct->amount;
-                $this->price = $orderproduct->price;
-                $this->description = $orderproduct->description;
-            }
+        if (isset($orderproduct->id)) {
+            $this->id = $orderproduct->id;
+            $this->order_id = $orderproduct->order_id;
+            $this->product_id = $orderproduct->product_id;
+            $this->amount = $orderproduct->amount;
+
+        
+        }
 
             //dd($this);
         
@@ -45,7 +70,7 @@ class OrderProductForm extends Component
 
     public function submit()
     {
-       //dd($this);
+        //dd($this);
         if (isset($this->service->id)) {
             $this->authorize('update', $this->service);
         } else {
@@ -58,17 +83,48 @@ class OrderProductForm extends Component
             $this->validate()
         );
 
+        if($this->order_created){
+
+            $this->dialog()->confirm([
+                'title' => __('orders.dialogs.products_question.title'),
+                'description' => __('orders.dialogs.products_question.second_description', [
+                    'name' => $this->new_id,
+                ]),
+                'icon' => 'question',
+                'accept' => [
+                    'label' => __('translation.dialogs.yes'),
+                    'method' => 'create',
+                    'params' => $this->new_id,
+                ],
+                'reject' => [
+                    'label' => __('translation.dialogs.no'),
+                    'method' => 'index',
+                ],
+            ]);
+        }
+
         flash(
             isset($this->orderproduct->id)
                 ? __('translation.messages.successes.updated_title')
                 : __('translation.messages.successes.stored_title'),
             isset($this->orderproduct->id)
-                ? __('commissions.messages.successes.updated', ['name' => $this->id])
-                : __('commissions.messages.successes.stored', ['name' => $this->id]),
+                ? __('orderproducts.messages.successes.updated', ['name' => $this->id])
+                : __('orderproducts.messages.successes.stored', ['name' => $this->id]),
             'success'
         );
-
         return $this->redirect(route('orderproducts.index'));
+
+       
+    }
+
+    public function index(){
+        return $this->redirect(route('orders.index'));
+
+    }
+
+    public function create($new_id){    
+        return $this->redirect(route('datas.create',['new_id'=>$new_id]));
+
     }
 
     public function rules()
@@ -88,19 +144,6 @@ class OrderProductForm extends Component
                 'string',
                 'min:1',
             ],
-
-            'price' => [
-                'required',
-                'numeric',
-                'gt:0',
-                'max:10000',
-            ],
-
-            'description' => [
-                'required',
-                'string',
-                'min:2',
-            ],
         ];
     }
 
@@ -108,7 +151,7 @@ class OrderProductForm extends Component
     public function validationAttributes()
     {
         return [
-            'description' => Str::lower(__('services.attributes.description')),
+            'order_id' => Str::lower(__('services.attributes.order_id')),
         ];
     }
     public function render()

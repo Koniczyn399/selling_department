@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderState;
 use App\Models\OrderProduct;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 
@@ -19,13 +20,17 @@ class OrderController extends Controller
     {
         $this->authorize('viewAny', arguments: Order::class);
 
+        $order= Order::query()
+        ->where('orders.id', '=', 6)->first();
+
 
         return view(
             'orders.index',
             data: [
                 'orders' => Order::paginate(
                     config('pagination.default')
-                )
+                ),
+                'order'=>$order,
             ]
         );
     }
@@ -70,7 +75,8 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $this->authorize('show', $order);
-        //dd($order);
+
+      
 
     
         $single_order= Order::query()
@@ -88,21 +94,44 @@ class OrderController extends Controller
             'sellers.last_name as seller_last_name',
 
             'orders.date_of_order',
-            'users.position as position' ,
+            'clients.position as position' ,
 
         ])->where('orders.id', '=', $order->id)->paginate(config('pagination.default'));
 
-        //dd($single_order);
 
-     
+        // $joint_amount = OrderProduct::query()
+        // ->join('products', function ($products) {
+        //     $products->on('order_products.product_id', '=', 'products.id');
+        // })
+        // ->where("order_products.order_id","=", $order->id)
+        // ->sum(DB::raw("order_products.amount * products.price"));
 
-        //dd($OrderProducts);
+        $products = OrderProduct::query()
+        ->join('products', function ($products) {
+            $products->on('order_products.product_id', '=', 'products.id');
+        })
+        ->select([
+            'order_products.order_id',
+            'products.product_name',
+            'products.price',
+            'order_products.amount as order_products_amount',
+            ])
+        ->where("order_products.order_id","=", $order->id)->get();
+
+        $joint_amount=0;
+        foreach ($products as $product){
+            $joint_amount+=$product->price * $product->order_products_amount;
+        }
+
+
         return view(
             'orders.show',
             [
                
                 'single_order' =>$single_order,
                 'order' =>$order,
+                'joint_amount'=>$joint_amount,
+                'products'=>$products,
 
             ]
         );
@@ -120,6 +149,7 @@ class OrderController extends Controller
         $users= User::query()->select([
             'users.id',
             'users.name',
+            'users.last_name',
         ])->get();
 
         $products = Product::query()->select([

@@ -40,7 +40,8 @@ class UserFactory extends Factory
             'post_code' =>fake()->postcode(),
             'description' => $this->faker->unique()->word(),
 
-            'position' => "",
+            'position' => null,
+            'unit_nr' => fake()->numberBetween(1,50),
 
             'password' => static::$password ??= Hash::make('password'),
             'two_factor_secret' => null,

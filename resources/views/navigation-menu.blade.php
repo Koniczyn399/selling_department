@@ -27,6 +27,18 @@
                         </x-nav-link>
                     @endcan
 
+                    @can('user_access')
+                        <x-nav-link href="{{ route('employees.index') }}" :active="request()->routeIs('employees.index')">
+                            {{ __('translation.navigation.employees') }}
+                        </x-nav-link>
+                    @endcan
+
+                    @can('product_access')
+                        <x-nav-link href="{{ route('orderproducts.index') }}" :active="request()->routeIs('orderproducts.index')">
+                            {{ __('translation.navigation.orderproducts') }}
+                        </x-nav-link>
+                    @endcan
+
                     @can('product_access')
                         <x-nav-link href="{{ route('products.index') }}" :active="request()->routeIs('products.index')">
                             {{ __('translation.navigation.products') }}

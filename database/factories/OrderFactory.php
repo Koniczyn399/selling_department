@@ -45,12 +45,4 @@ class OrderFactory extends Factory
         ];
     }
 
-    public function configure()
-    {
-        return $this->afterCreating(function (Order $order) {
-            $order->products()->attach(
-                Product::select('id')->orderByRaw('RAND()')->limit(rand(1, 3))->get()
-            );
-        });
-    }
 }

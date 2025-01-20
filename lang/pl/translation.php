@@ -6,23 +6,37 @@ return [
     'navigation' => [
         'users' => 'Klienci',
         'clients' => 'Klienci',
+        'employees'=> 'Pracownicy',
+     
         'categories' => 'Kategorie',
         'komponents' => 'Komponenty',
         'devices' => 'Urządzenia',
         'manufacturers' => 'Producenci',
         'orderstates' => 'Stany zamównień',
         'orders'=> 'Zamówienia',
+        'orders_history'=> 'Historia zamówień',
 
         'products'=> 'Towary',
 
-        'orderproducts'=> 'Zamówienia produktów ',
+        'orderproducts'=> 'Zamówienia towarów ',
         'orderdetails'=> 'Szczegóły zamówienia ',
+        'main_page' =>'Strona główna',
+        'log_in'=>'Zaloguj się',
+        'register'=>'Zarejestruj się',
 
-
+        'selling_department'=>'Dział Sprzedaży',
         'others'=> 'Pozostałe',
+        'account' =>'Konto',
+       
         
-        'account' =>'Konto'
-        
+    ],
+    'login'=>[
+
+        'forgot_password'=>'Zapomniałeś hasła?',
+        'password'=>'Hasło',
+        'remember'=>'Zapamiętaj mnie',
+
+
     ],
     'attributes' => [
         'actions' => '',
@@ -39,7 +53,9 @@ return [
         'enter' => 'Wprowadź',
         'select' => 'Wybierz',
         'save' => 'Zatwierdź',
-        'cancel' => 'Anuluj'
+        'cancel' => 'Anuluj',
+        'edit' =>'Edytuj',
+        'remove' => 'Usuń',
     ],
     'messages' => [
         'successes' => [
@@ -50,5 +66,10 @@ return [
     'relations' =>[
         
         'CategoryName'=> 'Nazwa kategorii',
+    ],
+    'dialogs'=>[
+        'yes'=>'Tak',
+        'no'=>'Nie',
     ]
+    
 ];

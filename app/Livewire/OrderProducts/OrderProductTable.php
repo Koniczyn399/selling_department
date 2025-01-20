@@ -4,6 +4,7 @@ namespace App\Livewire\OrderProducts;
 
 use App\Models\OrderProduct;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
@@ -21,6 +22,7 @@ final class OrderProductTable extends PowerGridComponent
     public function setUp(): array
     {
         //$this->showCheckBox();
+        
 
         return [
             PowerGrid::header()
@@ -30,6 +32,7 @@ final class OrderProductTable extends PowerGridComponent
                 ->showRecordCount(),
         ];
     }
+
 
     public function datasource(): Builder
     {
@@ -41,10 +44,10 @@ final class OrderProductTable extends PowerGridComponent
               ->select([
                   'order_products.id',
                   'order_products.order_id',
+                  'products.price as p',
                   'products.product_name',
-                  'order_products.price',
                   'order_products.amount',
-                  'order_products.description',
+
               ]);
     }
 
@@ -55,8 +58,9 @@ final class OrderProductTable extends PowerGridComponent
         ->add('order_id')
         ->add('product_name')
         ->add('amount')
-        ->add('price')
-        ->add('description')
+        ->add('price', function ($order_product) {
+            return floatval($order_product->amount * $order_product->p);
+        })
         ->add('created_at')
         ->add('created_at_formatted', fn (OrderProduct $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
@@ -80,8 +84,6 @@ final class OrderProductTable extends PowerGridComponent
             Column::make(__('orderproducts.attributes.price'), 'price')
             ->sortable(),
 
-            Column::make(__('orderproducts.attributes.description'), 'description')
-            ->sortable(),
 
             Column::make('Created at', 'created_at_formatted', 'created_at')
                 ->searchable(),

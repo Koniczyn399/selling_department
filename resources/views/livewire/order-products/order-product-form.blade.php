@@ -13,10 +13,14 @@
             <div class="">
                 <label for="order_id">{{ __('orderproducts.attributes.order_id') }}</label>
             </div>
-            <select wire:model="order_id" id="order_id">
-                <option value="" disabled selected>{{ __('services.actions.choose_order') }}</option>
+            @if($order_created)
+                <select wire:model="order_id" id="order_id" disabled="true">
+            @else
+                <select wire:model="order_id" id="order_id">
+            @endif
+                <option value="" disabled selected>{{ __('orders.actions.choose_order') }}</option>
                 @foreach ($orders as $order)
-                    <option value="{{ $order->id }}">{{ $order->id }}: {{ $order->client_name }}</option>
+                    <option value="{{ $order->id }}">{{ $order->id }}: {{ $order->client_name }} {{ $order->client_last_name }}</option>
                 @endforeach
             </select>
         </div>
@@ -28,10 +32,10 @@
                 <label for="product_id">{{ __('orderproducts.attributes.product_name') }}</label>
             </div>
             <select wire:model="product_id" id="product_id">
-                <option value="" disabled selected>{{ __('commissionkomponents.actions.choose_product') }}
+                <option value="" disabled selected>{{ __('orderproducts.actions.choose_product') }}
                 </option>
                 @foreach ($products as $product)
-                    <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                    <option value="{{ $product->id }}">{{ $product->product_name }}: {{ $product->price }} zł</option>
                 @endforeach
             </select>
         </div>
@@ -46,27 +50,6 @@
             </div>
         </div>
 
-
-        <hr class="my-2">
-        <div class="grid grid-cols-2 gap-2">
-            <div class="">
-                <label for="price">{{ __('orderproducts.attributes.price') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="{{ __('Wpisz') }}" wire:model="price" />
-            </div>
-        </div>
-
-
-        <hr class="my-2">
-        <div class="grid grid-cols-2 gap-2">
-            <div class="">
-                <label for="description">{{ __('orderproducts.attributes.description') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="{{ __('Wpisz') }}" wire:model="description" />
-            </div>
-        </div>
 
         <hr class="my-2">
         <div class="flex justify-end pt-2">

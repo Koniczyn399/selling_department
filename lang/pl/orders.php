@@ -13,6 +13,7 @@ return [
         'price' => 'Cena',
         'description' => 'Opis',
         'products' =>'Produkty',
+        'employee' =>'Pracownik',
 
     ],
     'actions' => [
@@ -26,6 +27,7 @@ return [
         'choose_client' => 'Wprowadź klienta',
         'choose_seller' => 'Wprowadź sprzedawcę',
         'choose_product' => 'Wprowadź produkt',
+        'choose_order' => 'Wybierz zamówienie',
 
     ],
     'labels' => [
@@ -40,5 +42,12 @@ return [
             'restored' => 'Przywrócono zamówienie :name',
         ],
     ],
+    'dialogs'=>[
+        'products_question'=>[
+            'title'=>'Zamówienia produktów',
+            'description'=>'Czy chcesz dodać produkty do zamówienia ?',
+            'second_description'=>'Czy chcesz dodać następny produkt do zamówienia ?', 
+        ]
+    ]
 
 ];

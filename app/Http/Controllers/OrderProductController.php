@@ -34,25 +34,14 @@ class OrderProductController extends Controller
     public function create()
     {
         $this->authorize('create', OrderProduct::class);
-        $this->authorize('viewAny', Order::class);
-        $this->authorize('viewAny', Product::class);
 
-        $orders = Order::query()->join('users as clients', first: function ($users) {
-            $users->on('orders.client_id', '=', 'clients.id');
-        })->select([
-            'orders.id',
-            'clients.name as client_name',
-        ])->get();
 
-        $products = Product::query()->select([
-            'products.id',
-            'products.product_name',
-        ])->get();
+
+
         return view(
             'orderproducts.form',
             [
-                "orders" => $orders,
-                "products" => $products
+                "new_id"=>null,
 
             ]
         );
@@ -99,8 +88,7 @@ class OrderProductController extends Controller
             'orderproducts.form',
             [
                 'orderproduct' => $orderproduct,
-                "orders" => $orders,
-                "products" => $products
+                'new_id'=>null,
             ]
         );
     }

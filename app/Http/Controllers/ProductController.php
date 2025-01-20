@@ -34,22 +34,8 @@ class ProductController extends Controller
         $this->authorize('create', Product::class);
 
 
-        $categories= Category::query()->select([
-            'categories.id',
-            'categories.category_name',
-        ])->get();
-
-        $manufacturers= Manufacturer::query()->select([
-            'manufacturers.id',
-            'manufacturers.manufacturer_name',
-        ])->get();
-
         return view(
-            'products.form',
-            [
-                'categories'=>$categories,
-                'manufacturers'=>$manufacturers,
-            ]
+            'products.form'
         );
     }
 
@@ -82,25 +68,12 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $this->authorize('create', Product::class);
-        $this->authorize('viewAny', Category::class);
-        $this->authorize('viewAny', Manufacturer::class);
-
-        $categories= Category::query()->select([
-            'categories.id',
-            'categories.category_name',
-        ])->get();
-
-        $manufacturers= Manufacturer::query()->select([
-            'manufacturers.id',
-            'manufacturers.manufacturer_name',
-        ])->get();
 
         return view(
             'products.form',
             [
                 'product'=> $product,
-                'categories'=>$categories,
-                'manufacturers'=>$manufacturers,
+
             ]
         );
     }

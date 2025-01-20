@@ -11,7 +11,7 @@
                 <div class="grid justify-items-stretch py-2">
                     @can('create', App\Models\OrderProduct::class)
                         <x-wireui-button primary label="{{ __('orderproducts.actions.create') }}"
-                            href="{{ route('orderproducts.create') }}" class="justify-self-end" />
+                            href="{{ route('orderproducts.create',['id'=>null]) }}" class="justify-self-end" />
                     @endcan
                 </div>
                 <livewire:order-products.order-product-table />

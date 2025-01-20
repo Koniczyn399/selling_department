@@ -10,9 +10,9 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2">
 
                 @if (isset($orderproduct->id))
-                    <livewire:order_products.order_product-form :orderproduct="$orderproduct" :orders="$orders" :products="$products" />
+                    <livewire:order_products.order_product-form :orderproduct="$orderproduct" :new_id="$new_id" />
                 @else
-                    <livewire:order_products.order_product-form :orders="$orders" :products="$products" />
+                    <livewire:order_products.order_product-form :new_id="$new_id"/>
                 @endif
             </div>
         </div>

@@ -3,7 +3,9 @@
 namespace App\Livewire\Orders;
 
 use App\Models\Order;
+use App\Models\OrderProduct;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
@@ -37,6 +39,7 @@ final class OrderTable extends PowerGridComponent
         ->join('users as clients', function ($users) {
             $users->on('orders.client_id', '=', 'clients.id');
         })
+        
           ->select([
             'orders.id',
             
@@ -73,8 +76,16 @@ final class OrderTable extends PowerGridComponent
             return $order->client_name. " ".$order->client_last_name ;
         })
         ->add('date_of_order')
+
         ->add('joint_amount', function ($order) {
-            return $order->products->pluck('price')->sum();
+            $price = OrderProduct::query()
+            ->where('order_products.order_id', '=',$order->id )
+            ->join('products', function ($products) {
+                $products->on('products.id', '=', 'order_products.product_id');
+            })
+            ->sum(DB::raw('order_products.amount * products.price'));
+
+            return $price;
         });
 
     }
@@ -128,7 +139,7 @@ final class OrderTable extends PowerGridComponent
         return [
     
             Button::add('showOrderDetailAction')
-                ->slot(Blade::render('<x-wireui-icon name="pencil" class="w-5 h-5" mini />'))
+                ->slot(Blade::render('<x-wireui-icon name="eye" class="w-5 h-5" mini />'))
                 ->tooltip(__('orders.actions.show_order_detail_action'))
                 ->class('text-green-500')
                 ->route('orders.show', [$order]),

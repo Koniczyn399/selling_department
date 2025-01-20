@@ -23,8 +23,6 @@ class OrderProductFactory extends Factory
             'product_id' => Product::select('id')->orderByRaw('RAND()')->first()->id,
 
             'amount' => $this->faker->numberBetween(1,50),
-            'price' => $this->faker->numberBetween(1,3000),
-            'description' => $this->faker->word(),
 
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',

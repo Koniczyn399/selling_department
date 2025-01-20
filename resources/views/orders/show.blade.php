@@ -5,65 +5,58 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2">
-                <div class="grid justify-items-stretch py-2">
-                    @can('create', App\Models\Order::class)
-                        <x-wireui-button primary label="{{ __('orders.actions.create') }}" href="{{ route('orders.create') }}"
-                            class="justify-self-end" />
-                    @endcan
-                </div>
 
-                <div class="py-12">
+                    <div class="content">
+                    <div class="table_div">
+                            <table>
+                                <tr>
+                                    <th class="left_table">{{ __('orders.attributes.order_id') }}: </th>
+                                    <th class="right_table">{{ $order->id }}</th>
+                                </tr>
 
+                                            
+                                @foreach ($single_order as $o)       
+                                <tr>
+                                    <th class="left_table"> {{ __('orders.attributes.employee') }}:</th>
+                                    <th class="right_table">  {{$o->client_name}}  {{$o->client_last_name}}</th>
+                                </tr>
+                                @endforeach
                 
-
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2">
-                            <div class="container">
-                                <div class="shadow-lg rounded-lg overflow-hidden mx-4">
                                     
-                                
-                                    {{ __('orders.attributes.order_id') }}: {{ $order->id }}<br>
-
-                                    {{ __('orders.attributes.client_name') }}:
-                                    @foreach ($single_order as $o)
-                                        {{$o->client_name}}
-                                        {{$o->client_last_name}}
+                                <tr>
+                                    <th class="left_table"> {{ __('orders.attributes.products') }}:</th>
+                                    <th class="right_table"> 
+                                    @foreach ($products as $product)
+                                                    {{$product->product_name}}: {{$product->price}} zł x{{$product->order_products_amount}},
                                     @endforeach
-                                    <br>
-                                    
 
-
-                                    {{ __('orders.attributes.products') }}: 
-                                    @foreach ($order->products as $product)
-                                        {{$product->product_name}},
-                                    @endforeach
-                                    <br>
-
-                                    
-                                    {{ __('orders.attributes.joint_amount') }}: {{ $order->products->pluck('price')->sum() }}<br>
-
-                                    {{ __('orders.attributes.seller_name') }}: 
-                                    @foreach ($single_order as $o)
-                                        {{$o->seller_name}}
-                                        {{$o->seller_last_name}}
-                                    @endforeach
-                                    <br>
-
-                                </div>
-                                <div class="m-4">
-                                  
-                                </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="left_table">{{ __('orders.attributes.joint_amount') }}:</th>
+                                    <th class="right_table">  {{ $joint_amount }}</th>
+                                </tr>
+                                @foreach ($single_order as $o)       
+                                <tr>
+                                    <th class="left_table"> {{ __('orders.attributes.seller_name') }}:</th>
+                                    <th class="right_table">  {{$o->seller_name}}   {{$o->seller_last_name}}</th>
+                                </tr>
+                                @endforeach
+                            </table>
+                        
                             </div>
-                        </div>
-                        @can('viewAny', App\Models\Order::class)
-                            <x-wireui-button primary label="{{ __('orders.actions.show_orders_action') }}"
-                                href="{{ route('orders.index') }}" class="justify-self-end" />
-                        @endcan
+                            <div class="button_divbox">
+                              
+
+                                <x-wireui-button primary label="{{ __('orders.actions.create') }}" href="{{ route('orders.create') }}"
+                                class="justify-self-end" />
+
+                                <x-wireui-button href="{{ route('orders.edit', [$single_order]) }}" secondary class="mr-2"
+                                label="{{ __('translation.placeholder.edit') }}" />
+
+                                <x-wireui-button href="{{ route('orders.index') }}" secondary class="mr-2"
+                                label="{{ __('translation.placeholder.cancel') }}" />
+                            </div>
                     </div>
-                </div>
-            </div>
-        </div>
+    
 </x-app-layout>

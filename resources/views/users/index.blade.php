@@ -15,8 +15,10 @@
                             href="{{ route('users.create') }}" class="justify-self-end" />
                     @endcan
                 </div>
+               
                 <livewire:users.user-table />
             </div>
+
         </div>
     </div>
 </x-app-layout>

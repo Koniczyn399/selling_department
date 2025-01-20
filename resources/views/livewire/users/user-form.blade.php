@@ -73,6 +73,13 @@
             </div>
 
             <div class="">
+                <label for="unit_nr">{{ __('users.attributes.unit_nr') }}</label>
+            </div>
+            <div class="">
+                <x-wireui-input placeholder="" wire:model="unit_nr" />
+            </div>
+
+            <div class="">
                 <label for="post_code">{{ __('users.attributes.post_code') }}</label>
             </div>
             <div class="">

@@ -14,7 +14,8 @@
                             href="{{ route('orders.create') }}" class="justify-self-end" />
                     @endcan
                 </div>
-                <livewire:orders.order-table />
+
+                <livewire:orders.order-table  />
             </div> 
         </div>
     </div>

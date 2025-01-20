@@ -14,30 +14,26 @@ class ProductForm extends Component
     use WireUiActions;
 
     public Product $product;
-    public $categories;
-    public $manufacturers;
-
+   
     public $id =null;
-    public $category_id ="";
-    public $manufacturer_id = "";
+
     public $product_name = "";
     public $price = "";
     public $unit = "";
     public $amount="";
-    public $description = "";
+    public $description="";
 
-    public function mount(Product $product = null, $categories, $manufacturers ){
+
+    public function mount(Product $product = null ){
 
        
       
         $this->product = $product;
-        $this->categories = $categories;
-        $this->manufacturers = $manufacturers;
+
 
             if (isset($product->id)) {
                 $this->id = $product->id;
-                $this->category_id = $product->category_id;
-                $this->manufacturer_id = $product->manufacturer_id;
+
                 $this->product_name = $product->product_name;
                 $this->price = $product->price;
                 $this->unit = $product->unit;
@@ -80,15 +76,6 @@ class ProductForm extends Component
     public function rules()
     {
         return [
-            'category_id' => [
-                'required',
-                'integer',
-            ],
-            'manufacturer_id' => [
-                'required',
-                'integer',
-            ],
-
 
             'product_name' => [
                 'required',
@@ -123,8 +110,6 @@ class ProductForm extends Component
     public function validationAttributes()
     {
         return [
-            'category_name' => Str::lower(__('services.attributes.category_name')),
-            'manufacturer_name' => Str::lower(__('services.attributes.manufacturer_name')),
             'product_name' => Str::lower(__('services.attributes.product_name')),
 
         ];

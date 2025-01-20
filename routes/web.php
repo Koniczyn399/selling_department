@@ -2,23 +2,20 @@
 
 use App\Http\Controllers\OrderProductController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RoomController;
+
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\DeviceController;
+
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\KomponentController;
-use App\Http\Controllers\CommissionController;
+use App\Http\Controllers\DataController;
 use App\Http\Controllers\OrderStateController;
 use App\Http\Controllers\ManufacturerController;
-use App\Http\Controllers\CommissionServiceController;
-use App\Http\Controllers\CommissionKomponentController;
+
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ServiceController;
-use App\Models\OrderProduct;
+use App\Http\Controllers\SpecialUserController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome_new');
 });
 
 
@@ -28,15 +25,45 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('orders.index');
     })->name('dashboard');
+
+    Route::name('users.show')->get('/users/{user}/{history?}', [UserController::class,'show']);
+    Route::name('users.edit')->get('/user_edit/{user}', [UserController::class,'edit']);
 
     Route::resource('users', UserController::class)->only([
         'index',
         'create',
+        //'edit',
+        //'show',
+    ]);
+
+   
+
+
+    Route::name('employees.show')->get('/employees/{user}', [SpecialUserController::class,'show']);
+    Route::resource('employees', SpecialUserController::class)->only([
+        'index',
+        'create',
+        'edit',
+        //'show',
+    ]);
+
+     Route::name('datas.create')->get('/datas/{new_id}', [DataController::class,'create']);
+
+    Route::resource('datas', DataController::class)->only([
+        'index',
+     //   'create',
         'edit',
         'show',
+        
+
     ]);
+   
+
+   
+  
+
 
     Route::resource('manufacturers', ManufacturerController::class)->only([
         'index',
@@ -73,10 +100,13 @@ Route::middleware([
     ]);
 
     Route::resource('orderproducts', OrderProductController::class)->only([
+        'edit',
         'index',
         'create',
-        'edit',
+      
     ]);
+
+    
 
 });
 

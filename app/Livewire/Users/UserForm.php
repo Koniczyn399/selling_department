@@ -22,6 +22,8 @@ class UserForm extends Component
     public $city = "";
     public $street = "";
     public $street_number = "";
+    public $unit_nr ="";
+
     public $phone_number = "";
     public $description = "";
 
@@ -43,6 +45,7 @@ class UserForm extends Component
             $this->street = $user->street;
             $this->city = $user->city;
             $this->street_number = $user->street_number;
+            $this->unit_nr = $user->unit_nr;
             $this->phone_number = $user->phone_number;
             $this->description = $user->description;
             $this->email = $user->email;
@@ -67,8 +70,8 @@ class UserForm extends Component
                 ? __('translation.messages.successes.updated_title')
                 : __('translation.messages.successes.stored_title'),
             isset($this->user->id)
-                ? __('users.messages.successes.updated', ['last_name' => $this->last_name])
-                : __('users.messages.successes.stored', ['last_name' => $this->last_name]),
+                ? __('users.messages.successes.updated', ['name' => $this->last_name])
+                : __('users.messages.successes.stored', ['name' => $this->last_name]),
             'success'
         );
 
@@ -110,6 +113,13 @@ class UserForm extends Component
 
             'street_number' => [
                 'required',
+                'string',
+                'min:1',
+
+            ],
+
+            'unit_nr' => [
+                
                 'string',
                 'min:1',
 

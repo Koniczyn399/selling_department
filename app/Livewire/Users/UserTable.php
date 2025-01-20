@@ -43,7 +43,8 @@ final class UserTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return User::query();
+        //return User::query()->whereNull('position');
+        return User::query()->where('users.position','=',null);
     }
 
     public function relationSearch(): array
@@ -125,6 +126,12 @@ final class UserTable extends PowerGridComponent
             ->class('text-green-500')
             ->route('users.show', [$user]),
 
+            Button::add('show_user_orders')
+            ->slot(Blade::render('<x-wireui-icon name="eye" class="w-5 h-5" mini />'))
+            ->tooltip(__('users.actions.show_user_orders'))
+            ->class('text-green-500')
+            ->route('users.show', ['user'=>$user, 'history'=>'true']),
+
         Button::add('edit_user')
             ->slot(Blade::render('<x-wireui-icon name="pencil" class="w-5 h-5" mini />'))
             ->tooltip(__('users.actions.edit_user'))
@@ -133,7 +140,7 @@ final class UserTable extends PowerGridComponent
             ->route('users.edit', [$user]),
 
         Button::add('remove_user')
-            ->slot(Blade::render('<x-wireui-icon name="x-mark" class="w-5 h-5" mini />'))
+            ->slot(Blade::render('<x-wireui-icon name="x-mark"  class="w-5 x h-5" mini />'))
             ->tooltip(__('users.actions.remove_user'))
             ->class('text-red-500')
             ->dispatch('remove_user', ['id' => $user->id]),
