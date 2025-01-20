@@ -104,6 +104,15 @@
 
                     <tr>
                         <th class="left_table"> 
+                        <label for="password">{{ __('users.attributes.password') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="password" />
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th class="left_table"> 
                         <label for="description">{{ __('users.attributes.description') }}</label>
                         </th>
                         <th class="right_table">

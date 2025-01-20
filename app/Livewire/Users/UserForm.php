@@ -26,6 +26,7 @@ class UserForm extends Component
 
     public $phone_number = "";
     public $description = "";
+    public $password = "";
 
 
     public function mount(User $user = null)
@@ -49,16 +50,17 @@ class UserForm extends Component
             $this->phone_number = $user->phone_number;
             $this->description = $user->description;
             $this->email = $user->email;
+            $this->password = $user->password;
         }
     }
 
     public function submit()
     {
-        if (isset($this->user->id)) {
-            $this->authorize('update', $this->user);
-        } else {
-            $this->authorize('create', User::class);
-        }
+        // if (isset($this->user->id)) {
+        //     $this->authorize('update', $this->user);
+        // } else {
+        //     $this->authorize('create', User::class);
+        // }
 
         User::updateOrCreate(
             ['id' => $this->id],
@@ -97,6 +99,20 @@ class UserForm extends Component
             ],
 
             'post_code' => [
+                'required',
+                'string',
+                'min:2',
+
+            ],
+
+            'password' => [
+                'required',
+                'string',
+                'min:2',
+
+            ],
+
+            'email' => [
                 'required',
                 'string',
                 'min:2',

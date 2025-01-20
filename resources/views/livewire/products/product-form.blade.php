@@ -32,6 +32,10 @@
                         <th class="right_table">  <x-wireui-input placeholder="{{ __('Wpisz') }}" wire:model="price" /></th>
                     </tr>
                     <tr>
+                        <th class="left_table"> <label for="amount">{{ __('products.attributes.amount') }}</label>:</th>
+                        <th class="right_table"> <x-wireui-input placeholder="{{ __('Wpisz') }}" wire:model="amount" /></th>
+                    </tr>
+                    <tr>
                         <th class="left_table"> <label for="description">{{ __('products.attributes.description') }}</label>:</th>
                         <th class="right_table"> <x-wireui-input placeholder="{{ __('Wpisz') }}" wire:model="description" /></th>
                     </tr>

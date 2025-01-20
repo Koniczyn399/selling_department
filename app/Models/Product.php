@@ -15,7 +15,7 @@ class Product extends Model
                             "product_name",
                             "price",
                             "unit",
-                           
+                            "amount",
                             "description",
                         ];
 

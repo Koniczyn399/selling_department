@@ -86,18 +86,18 @@ class ProductForm extends Component
             'price' => [
                 'required',
                 'string',
-                'min:2',
+                'min:1',
             ],
 
             'unit' => [
                 'required',
                 'string',
-                'min:2',
+                'min:1',
             ],
             'amount' => [
                 'required',
                 'string',
-                'min:2',
+                'min:1',
             ],
             'description' => [
                 'required',
