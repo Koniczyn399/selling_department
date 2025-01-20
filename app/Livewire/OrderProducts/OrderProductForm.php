@@ -112,7 +112,10 @@ class OrderProductForm extends Component
                 : __('orderproducts.messages.successes.stored', ['name' => $this->id]),
             'success'
         );
-        return $this->redirect(route('orderproducts.index'));
+        
+        if(!$this->order_created){
+            return $this->redirect(route('orderproducts.index'));
+        }
 
        
     }

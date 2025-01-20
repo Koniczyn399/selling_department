@@ -1,108 +1,127 @@
-<div class="p-2">
-    <form wire:submit.prevent="submit">
-        <h3 class="text-xl font-semibold leading-tight text-gray-800">
-            @if (isset($id))
-                {{ __('users.labels.edit_form_title') }}
-            @else
-                {{ __('users.labels.create_form_title') }}
-            @endif
-        </h3>
 
-        <hr class="my-2">
-        <div class="grid grid-cols-2 gap-2">
+<form wire:submit.prevent="submit">
+    <div class="content">   
+        <div class="table_div">
+            <h3 class="imie">
+                @if (isset($id))
+                    {{ __('users.labels.edit_form_title') }}
+                @else
+                    {{ __('users.labels.create_form_title') }}
+                @endif
+            </h3>
+            
+                <table>
+                    
+                    <tr>
+                        <th class="left_table"> 
+                            <label for="name">{{ __('users.attributes.name') }}</label>
+                        </th>
+                        <th class="right_table">
+                            <x-wireui-input placeholder="" wire:model="name" />
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th class="left_table"> 
+                            <label for="last_name">{{ __('users.attributes.last_name') }}</label>
+                        </th>
+                        <th class="right_table">
+                            <x-wireui-input placeholder="" wire:model="last_name" />
+                        </th>
+                    </tr>
+                
+                    <tr>
+                        <th class="left_table"> 
+                        <label for="phone_number">{{ __('users.attributes.phone_number') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="phone_number" />
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th class="left_table"> 
+                        <label for="email">{{ __('users.attributes.email') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="email" />
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th class="left_table"> 
+                        <label for="nip">{{ __('users.attributes.nip') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="nip" />
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th class="left_table"> 
+                        <label for="city">{{ __('users.attributes.city') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="city" />
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th class="left_table"> 
+                        <label for="street">{{ __('users.attributes.street') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="street" />
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th class="left_table"> 
+                        <label for="street_number">{{ __('users.attributes.street_number') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="street_number" />
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th class="left_table"> 
+                        <label for="unit_nr">{{ __('users.attributes.unit_nr') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="unit_nr" />
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th class="left_table"> 
+                        <label for="post_code">{{ __('users.attributes.post_code') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="post_code" />
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th class="left_table"> 
+                        <label for="description">{{ __('users.attributes.description') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="description" />
+                        </th>
+                    </tr>
 
 
-
-            <div class="">
-                <label for="name">{{ __('users.attributes.name') }}</label>
+                </table>
             </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="name" />
-            </div>
-
-            <div class="">
-                <label for="last_name">{{ __('users.attributes.last_name') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="last_name" />
-            </div>
-
-            <div class="">
-                <label for="phone_number">{{ __('users.attributes.phone_number') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="phone_number" />
-            </div>
-
-
-            <div class="">
-                <label for="email">{{ __('users.attributes.email') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="email" />
-            </div>
-
-
-            <div class="">
-                <label for="nip">{{ __('users.attributes.nip') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="nip" />
-            </div>
-
-            <div class="">
-                <label for="city">{{ __('users.attributes.city') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="city" />
-            </div>
-
-
-            <div class="">
-                <label for="street">{{ __('users.attributes.street') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="street" />
-            </div>
-
-            <div class="">
-                <label for="street_number">{{ __('users.attributes.street_number') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="street_number" />
-            </div>
-
-            <div class="">
-                <label for="unit_nr">{{ __('users.attributes.unit_nr') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="unit_nr" />
-            </div>
-
-            <div class="">
-                <label for="post_code">{{ __('users.attributes.post_code') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="post_code" />
-            </div>
-
-
-            <div class="">
-                <label for="description">{{ __('users.attributes.description') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="description" />
-            </div>
-
-        </div>
-
-        
-
-        <hr class="my-2">
-        <div class="flex justify-end pt-2">
+            <div class="button_divbox">
             <x-wireui-button href="{{ route('users.index') }}" secondary class="mr-2"
-                label="{{ __('translation.placeholder.cancel') }}" />
-            <x-wireui-button type="submit" primary label="{{ __('translation.placeholder.save') }}" spinner />
+            label="{{ __('translation.placeholder.cancel') }}" />
+        <x-wireui-button type="submit" primary label="{{ __('translation.placeholder.save') }}" spinner />
+            </div>
         </div>
-    </form>
-</div>
+    </div>
+
+</form>
+
+

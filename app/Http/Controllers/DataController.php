@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderProduct;
-use Illuminate\Http\Request;
 
 class DataController extends Controller
 {
@@ -49,7 +48,6 @@ class DataController extends Controller
                 "orders" => $orders,
                 "products" => $products,
                 "new_id" =>$new_id,
-
             ]
         );
     }
@@ -80,6 +78,6 @@ class DataController extends Controller
      */
     public function destroy( )
     {
-
+        //
     }
 }

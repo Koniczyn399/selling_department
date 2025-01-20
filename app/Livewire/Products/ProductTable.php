@@ -93,7 +93,7 @@ final class ProductTable extends PowerGridComponent
     {
         return [
             Button::add('show_product')
-            ->slot(Blade::render('<x-wireui-icon name="pencil" class="w-5 h-5" mini />'))
+            ->slot(Blade::render('<x-wireui-icon name="eye" class="w-5 h-5" mini />'))
             ->tooltip(__('products.actions.show_product'))
             ->class('text-green-500')
             ->route('products.show', [$product]),

@@ -121,7 +121,7 @@ final class UserTable extends PowerGridComponent
     {
         return [
             Button::add('show_user')
-            ->slot(Blade::render('<x-wireui-icon name="pencil" class="w-5 h-5" mini />'))
+            ->slot(Blade::render('<x-wireui-icon name="eye" class="w-5 h-5" mini />'))
             ->tooltip(__('users.actions.show_user'))
             ->class('text-green-500')
             ->route('users.show', [$user]),
@@ -129,7 +129,7 @@ final class UserTable extends PowerGridComponent
             Button::add('show_user_orders')
             ->slot(Blade::render('<x-wireui-icon name="eye" class="w-5 h-5" mini />'))
             ->tooltip(__('users.actions.show_user_orders'))
-            ->class('text-green-500')
+            ->class('text-blue-500')
             ->route('users.show', ['user'=>$user, 'history'=>'true']),
 
         Button::add('edit_user')

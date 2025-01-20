@@ -15,17 +15,17 @@ class EmployeeForm extends Component
 
     public $id = null;
     public $name = "";
-    public $email = "";
+    public $email = "testowy@testowy";
     public $last_name = "";
     public $nip = "";
-    public $post_code = "";
-    public $city = "";
-    public $street = "";
-    public $street_number = "";
-    public $unit_nr ="";
+    public $post_code = "00-000";
+    public $city = "Kalisz";
+    public $street = "Kaliszowa";
+    public $street_number = "0";
+    public $unit_nr ="0";
 
-    public $phone_number = "";
-    public $description = "";
+    public $phone_number = "123-123-123";
+    public $description = "Pracownik";
     public $position = "";
 
 
@@ -37,19 +37,20 @@ class EmployeeForm extends Component
         $this->employee = $employee;
 
 
+        $this->post_code = $employee->post_code;
+        $this->street = $employee->street;
+        $this->city = $employee->city;
+        $this->street_number = $employee->street_number;
+        $this->unit_nr = $employee->unit_nr;
+        $this->phone_number = $employee->phone_number;
+        $this->description = $employee->description;
+        $this->email = $employee->email;
+
         if (isset($employee->id)) {
             $this->id = $employee->id;
             $this->name = $employee->name;
             $this->last_name = $employee->last_name;
             $this->nip = $employee->nip;
-            $this->post_code = $employee->post_code;
-            $this->street = $employee->street;
-            $this->city = $employee->city;
-            $this->street_number = $employee->street_number;
-            $this->unit_nr = $employee->unit_nr;
-            $this->phone_number = $employee->phone_number;
-            $this->description = $employee->description;
-            $this->email = $employee->email;
             $this->position = $employee->position;
         }
     }

@@ -44,9 +44,9 @@ return [
     ],
     'dialogs'=>[
         'products_question'=>[
-            'title'=>'Zamówienia produktów',
-            'description'=>'Czy chcesz dodać produkty do zamówienia ?',
-            'second_description'=>'Czy chcesz dodać następny produkt do zamówienia ?', 
+            'title'=>'Zamówienia towarów',
+            'description'=>'Czy chcesz dodać towary do zamówienia ?',
+            'second_description'=>'Czy chcesz dodać następny towar do zamówienia ?', 
         ]
     ]
 

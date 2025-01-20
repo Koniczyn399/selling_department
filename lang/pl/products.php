@@ -14,12 +14,12 @@ return [
 
     ],
     'actions' => [
-        'remove_product_action' => 'Usuń produkt',
-        'add_product_action' => 'Dodaj produkt',
-        'edit_product_action' => 'Zmodyfikuj produkt',
-        'create' => 'Dodaj produkt',
-        'choose_category' => 'Wybierz kategorię',
-        'choose_manufacturer' => 'Wybierz producenta',
+        'remove_product_action' => 'Usuń towar',
+        'add_product_action' => 'Dodaj towar',
+        'edit_product_action' => 'Zmodyfikuj towar',
+        'create' => 'Dodaj towar',
+        'show_product' => 'Pokaż towar',
+
 
     ],
     'labels' => [

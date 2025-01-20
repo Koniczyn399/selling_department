@@ -19,12 +19,11 @@ return[
         'roles'=>'Role',
     ],
     'actions' => [
-        'assign_admin_role' => 'Ustaw rolę admina',
-        'remove_admin_role' => 'Odbierz rolę admina',
-        'assign_worker_role' => 'Ustaw rolę pracownika',
-        'remove_worker_role' => 'Odbierz rolę pracownika',
         'create' => 'Dodaj nowego klienta',
         'show_user_orders' => 'Pokaż zamówienia klienta',
+        'show_user' => 'Pokaż klienta',
+        'edit_user' => 'Zmodyfikuj klienta',
+        'remove_user' => 'Usuń klienta',
     ],
 
     'labels' => [

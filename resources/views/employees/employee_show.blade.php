@@ -52,6 +52,9 @@
                 </table>
             
             </div>
+            <div class="button_divbox">
+                <x-wireui-button href="{{ route('employees.index') }}" secondary class="mr-2"
+                label="{{ __('translation.placeholder.cancel') }}" />
           
         </div>
     </body>

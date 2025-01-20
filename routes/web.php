@@ -30,22 +30,22 @@ Route::middleware([
 
     Route::name('users.show')->get('/users/{user}/{history?}', [UserController::class,'show']);
     Route::name('users.edit')->get('/user_edit/{user}', [UserController::class,'edit']);
+    Route::name('users.create')->get('/user_create', [UserController::class,'create']);
 
     Route::resource('users', UserController::class)->only([
         'index',
-        'create',
+        //'create',
         //'edit',
         //'show',
     ]);
 
-   
-
-
     Route::name('employees.show')->get('/employees/{user}', [SpecialUserController::class,'show']);
+    Route::name('employees.edit')->get('/employee_edit/{employee}', [SpecialUserController::class,'edit']);
+    Route::name('employees.create')->get('/employee_create', [SpecialUserController::class,'create']);
     Route::resource('employees', SpecialUserController::class)->only([
         'index',
-        'create',
-        'edit',
+        // 'create',
+        // 'edit',
         //'show',
     ]);
 

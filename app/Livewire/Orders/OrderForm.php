@@ -4,16 +4,16 @@ namespace App\Livewire\Orders;
 
 use App\Models\User;
 use App\Models\Order;
-use App\Models\Product;
 use Livewire\Component;
 use Illuminate\Support\Str;
-use App\Models\OrderProduct;
 use WireUi\Traits\WireUiActions;
+
 
 class OrderForm extends Component
 {
 
     use WireUiActions;
+
 
     public Order $order;
     public $users;
@@ -23,42 +23,16 @@ class OrderForm extends Component
     public $id =null;
     public $client_id = "";
     public $seller_id = "";
-
     public $date_of_order="";
-    // public $order_products=[];
-    // public $send_order_products=[];
 
-    public $orders;
-    // public $products;
 
 
     public function mount(Order $order = null, $users){
-      
+
         $this->order =$order;
         $this->users =$users;
-        // $this->products =$products;
         $this->sellers=User::query()->where('users.position','!=',null)->get();
-
-        // $this->order_products=OrderProduct::query()
-        // ->join('products', function ($products) {
-        //     $products->on('order_products.product_id', '=', 'products.id');
-        // })
-        // ->select('order_products.id', 'products.product_name')->get()->toArray();
-        // //dd($this->order_products);
-
-        // $this->orders = Order::query()->join('users as clients', first: function ($users) {
-        //     $users->on('orders.client_id', '=', 'clients.id');
-        // })->select([
-        //     'orders.id',
-        //     'clients.name as client_name',
-        // ])->get();
-
-        // $this->products = Product::query()->select([
-        //     'products.id',
-        //     'products.product_name',
-        // ])->get();
         
-
 
             if (isset($order)) {
                 $this->id = $order->id;
@@ -67,8 +41,7 @@ class OrderForm extends Component
                 $this->date_of_order = $order->date_of_order;
               
             }
-            //dd($this);
-        //dd($order);
+
     }
 
     
@@ -135,6 +108,7 @@ class OrderForm extends Component
 
         ];
     }
+    
 
     public function validationAttributes()
     {

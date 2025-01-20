@@ -1,55 +1,68 @@
-<div class="p-2">
-    <form wire:submit.prevent="submit">
-        <h3 class="text-xl font-semibold leading-tight text-gray-800">
-            @if (isset($id))
+
+<form wire:submit.prevent="submit">
+    <div class="content">   
+        <div class="table_div">
+            <h3 class="imie">
+            <br>
+                @if (isset($id))
                 {{ __('employees.labels.edit_form_title') }}
-            @else
-                {{ __('employees.labels.create_form_title') }}
-            @endif
-        </h3>
+                @else
+                    {{ __('employees.labels.create_form_title') }}
+                @endif
+            </h3>
+            
+                <table>
+                    
+                    <tr>
+                        <th class="left_table"> 
+                            <label for="name">{{ __('users.attributes.name') }}</label>
+                        </th>
+                        <th class="right_table">
+                            <x-wireui-input placeholder="" wire:model="name" />
+                        </th>
+                    </tr>
 
-        <hr class="my-2">
-        <div class="grid grid-cols-2 gap-2">
+                    <tr>
+                        <th class="left_table"> 
+                            <label for="last_name">{{ __('users.attributes.last_name') }}</label>
+                        </th>
+                        <th class="right_table">
+                            <x-wireui-input placeholder="" wire:model="last_name" />
+                        </th>
+                    </tr>
+                
 
-            <div class="">
-                <label for="name">{{ __('users.attributes.name') }}</label>
+
+                    <tr>
+                        <th class="left_table"> 
+                        <label for="nip">{{ __('users.attributes.nip') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="nip" />
+                        </th>
+                    </tr>
+
+
+                    <tr>
+                        <th class="left_table"> 
+                        <label for="position">{{ __('employees.attributes.position') }}</label>
+                        </th>
+                        <th class="right_table">
+                        <x-wireui-input placeholder="" wire:model="position" />
+                        </th>
+                    </tr>
+
+
+                </table>
             </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="name" />
-            </div>
-
-            <div class="">
-                <label for="last_name">{{ __('users.attributes.last_name') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="last_name" />
-            </div>
-
-
-            <div class="">
-                <label for="nip">{{ __('users.attributes.nip') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="nip" />
-            </div>
-
-
-            <div class="">
-                <label for="position">{{ __('employees.attributes.position') }}</label>
-            </div>
-            <div class="">
-                <x-wireui-input placeholder="" wire:model="position" />
-            </div>
-
-        </div>
-
-        
-
-        <hr class="my-2">
-        <div class="flex justify-end pt-2">
+            <div class="button_divbox">
             <x-wireui-button href="{{ route('employees.index') }}" secondary class="mr-2"
-                label="{{ __('translation.placeholder.cancel') }}" />
-            <x-wireui-button type="submit" primary label="{{ __('translation.placeholder.save') }}" spinner />
+            label="{{ __('translation.placeholder.cancel') }}" />
+        <x-wireui-button type="submit" primary label="{{ __('translation.placeholder.save') }}" spinner />
+            </div>
         </div>
-    </form>
-</div>
+    </div>
+
+</form>
+
+

@@ -88,7 +88,7 @@ final class OrderProductTable extends PowerGridComponent
             Column::make('Created at', 'created_at_formatted', 'created_at')
                 ->searchable(),
 
-            Column::action('Action')
+            Column::action('')
         ];
     }
 
@@ -112,7 +112,7 @@ final class OrderProductTable extends PowerGridComponent
             Button::add('editOrderProductAction')
             ->slot(Blade::render('<x-wireui-icon name="pencil" class="w-5 h-5" mini />'))
             ->tooltip(__('orderproducts.actions.edit_orderproduct_action'))
-            ->class('text-green-500')
+            ->class('text-yellow-500')
             ->route('orderproducts.edit', [$orderproduct]),
 
             Button::add('removeOrderProductAction')

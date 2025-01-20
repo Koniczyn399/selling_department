@@ -70,7 +70,7 @@ final class EmployeeTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::action('Action')
+            Column::action('')
         ];
     }
 

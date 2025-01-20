@@ -51,6 +51,7 @@ class OrderController extends Controller
         $users= User::query()->select([
             'users.id',
             'users.name',
+            'users.last_name',
         ])->get();
         return view(
             'orders.form',
@@ -75,8 +76,6 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $this->authorize('show', $order);
-
-      
 
     
         $single_order= Order::query()
